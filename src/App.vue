@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Tensorflow video demo</h1>
+    <h1>100ms Vue Video Demo</h1>
     <div class="layout">
       <div class="header">
         <UHeader />
@@ -39,8 +39,8 @@ onUnmounted(() => leaveRoom());
 
 <style lang="scss">
 .home {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 .layout {
   display: flex;
@@ -50,7 +50,7 @@ onUnmounted(() => leaveRoom());
 
 .conference-container {
   flex-grow: 1;
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
 }
 
