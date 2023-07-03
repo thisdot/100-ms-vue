@@ -1,11 +1,12 @@
 <template>
   <span title="copy link" class="share-btn" @click="copyShareLink">
-    SHARE LINK
+    <ShareIcon />
   </span>
 </template>
 
 <script setup>
 import { useHmsStore } from "@/stores/hms";
+import ShareIcon from "./icons/ShareIcon.vue";
 
 const hmsStore = useHmsStore();
 
@@ -14,7 +15,7 @@ function copyShareLink() {
   console.log("sharable url = ", url);
   navigator.clipboard.writeText(url).then(
     function () {
-      console.log("link copied to clipboard");
+      alert("link copied to clipboard");
       // toast.success("Room link copied to clipboard");
     },
     function (err) {

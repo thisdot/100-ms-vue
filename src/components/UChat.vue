@@ -2,7 +2,7 @@
   <div class="chat-container">
     <div class="chat-header">
       <span>Chat</span>
-      <button class="chat-close-btn" @click="closeChat">close</button>
+      <button class="chat-close-btn" @click="closeChat"><TimesIcon /></button>
     </div>
     <div
       ref="chatBodyElement"
@@ -44,6 +44,7 @@ import { onBeforeUpdate, onMounted, onUpdated, ref } from "vue";
 import { hmsActions } from "@/utils/hms";
 import { marked } from "marked";
 import { useHmsStore } from "@/stores/hms";
+import TimesIcon from "./icons/TimesIcon.vue";
 const hmsStore = useHmsStore();
 
 const chatBodyElement = ref();
@@ -123,7 +124,7 @@ onMounted(() => scrollToBottom(true));
     display: flex;
     align-items: center;
     justify-content: center;
-    background: red;
+    background: transparent;
     outline: none;
     border: none;
     color: white;
@@ -169,7 +170,7 @@ onMounted(() => scrollToBottom(true));
     &-info {
       display: flex;
       align-items: center;
-      justify-content: end;
+      justify-content: flex-end;
       font-size: 0.6rem;
       margin-top: 0.1rem;
     }

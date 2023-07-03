@@ -20,8 +20,8 @@
       <ConnectionQuality :peerId="peer.id" />
     </div>
     <div class="mic-state">
-      <span v-if="!isAudioEnabled">Mic Off</span>
-      <span v-else>Mic on</span>
+      <span v-if="!isAudioEnabled"><MicOffIcon /></span>
+      <span v-else><MicIcon /></span>
     </div>
   </div>
 </template>
@@ -36,6 +36,8 @@ import { defineProps, onMounted, onUnmounted, ref } from "vue";
 import ConnectionQuality from "./ConnectionQuality.vue";
 import UVideo from "./UVideo.vue";
 import UserAvartar from "./UserAvartar.vue";
+import MicOffIcon from "./icons/MicOffIcon.vue";
+import MicIcon from "./icons/MicIcon.vue";
 import { addAudioBorder } from "@/utils/audioLevel";
 const props = defineProps({
   peer: {
@@ -115,5 +117,10 @@ onUnmounted(() => {
   background: #cc525f;
   border-radius: 100rem;
   padding: 6px;
+
+  & > span > svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 </style>
