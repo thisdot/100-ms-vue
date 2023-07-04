@@ -38,7 +38,9 @@ import UVideo from "./UVideo.vue";
 import UserAvartar from "./UserAvartar.vue";
 import MicOffIcon from "./icons/MicOffIcon.vue";
 import MicIcon from "./icons/MicIcon.vue";
-import { addAudioBorder } from "@/utils/audioLevel";
+import { useHmsStore } from "@/stores/hms";
+const store = useHmsStore();
+
 const props = defineProps({
   peer: {
     type: Object,
@@ -57,7 +59,7 @@ const unsub2 = hmsStore.subscribe((enabled) => {
   isAudioEnabled.value = enabled;
 }, selectIsPeerAudioEnabled(props.peer.id));
 
-onMounted(() => addAudioBorder(props.peer.id, peerTileElement.value));
+onMounted(() => store.addAudioBorder(props.peer.id, peerTileElement.value));
 onUnmounted(() => {
   unsub1();
   unsub2();

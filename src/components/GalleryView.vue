@@ -15,10 +15,11 @@
 
 <script setup>
 import { useHmsStore } from "@/stores/hms";
+import { computed } from "vue";
 import UPeer from "./UPeer.vue";
 const hmsStore = useHmsStore();
 
-let isTalking = "";
+let isTalking = computed(() => hmsStore.isTalking);
 </script>
 
 <style lang="scss" scoped>
