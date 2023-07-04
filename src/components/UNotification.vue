@@ -8,7 +8,7 @@
 import { ref, onUnmounted } from "vue";
 import { HMSNotificationTypes } from "@100mslive/hms-video-store";
 import { useToast, POSITION, TYPE } from "vue-toastification";
-import { hmsNotifications, hmsActions } from "@/utils/hms";
+import { hmsNotifications } from "@/utils/hms";
 import { useHmsStore } from "@/stores/hms";
 
 import UToast from "./UToast.vue";
@@ -47,7 +47,6 @@ const unsub = hmsNotifications.onNotification((notification) => {
             timeout: false,
           }
         );
-        hmsActions.leave();
       } else if ([3001, 3011].includes(code)) {
         // device permission error
         const isSystemError = code === 3011; // there are two types - system denied permission or user denied permission

@@ -64,7 +64,7 @@ function manageVideo(trackId, videoElement) {
   if (unsub) unsub(); // unsubscribe previous
 
   unsub = hmsStore.subscribe((track) => {
-    if (!track || !videoElement) {
+    if (!track && !videoElement) {
       return;
     }
     if (track?.enabled && detector) {
@@ -143,14 +143,20 @@ function manageVideo(trackId, videoElement) {
 const object_fit = computed(() => ({ "--objectFit": props.objectFit }));
 
 watch([() => props.trackId, () => videoElement.value], () => {
-  props.trackId && manageVideo(props.trackId, videoElement.value);
+  props.trackId &&
+    videoElement.value &&
+    manageVideo(props.trackId, videoElement.value);
 });
 
 onMounted(async () => {
   detector = await createDetectionInstance();
 });
 
-onUnmounted(() => unsub?.());
+onUnmounted(() => {
+  unsub?.();
+  detector = null;
+  videoElement.value = null;
+});
 </script>
 
 <style lang="scss" scoped>
