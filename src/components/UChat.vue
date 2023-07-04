@@ -45,7 +45,9 @@ import { hmsActions } from "@/utils/hms";
 import { marked } from "marked";
 import { useHmsStore } from "@/stores/hms";
 import TimesIcon from "./icons/TimesIcon.vue";
+import { useToast, POSITION } from "vue-toastification";
 const hmsStore = useHmsStore();
+const toast = useToast();
 
 const chatBodyElement = ref();
 let draftMessage = ref("");
@@ -66,7 +68,9 @@ const sendMessage = async () => {
       await hmsActions.sendBroadcastMessage(draftMessage.value);
       draftMessage.value = "";
     } catch (err) {
-      // toast.error(`Failed to send message - ${err.message}`);
+      toast.error(`Failed to send message - ${err.message}`, {
+        position: POSITION.BOTTOM_LEFT,
+      });
     }
   }
 };

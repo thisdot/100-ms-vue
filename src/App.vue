@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <UNotification />
     <div class="layout">
       <div class="header">
         <UHeader />
@@ -20,7 +21,7 @@ import JoinForm from "@/components/JoinForm.vue";
 import UConference from "@/components/UConference.vue";
 import UFooter from "@/components/UFooter.vue";
 import UHeader from "@/components/UHeader.vue";
-// import { onUnmounted } from "vue";
+import UNotification from "./components/UNotification.vue";
 import { hmsActions } from "@/utils/hms";
 import { useHmsStore } from "@/stores/hms";
 
@@ -32,7 +33,6 @@ const hmsStore = useHmsStore();
 
 hmsStore.initialiseSubscribe();
 
-// onUnmounted(() => leaveRoom());
 window.addEventListener("unload", () => leaveRoom());
 </script>
 
@@ -125,23 +125,20 @@ h5 {
   --toastContainerLeft: 3rem;
   --toastWidth: 20rem;
 }
-
-.toast {
-  &-default {
-    --toastBackground: #61758f;
-    --toastBarBackground: #4a5d6e;
-  }
-  &-green {
-    --toastBackground: #36b37e;
-    --toastBarBackground: #2f855a;
-  }
-  &-yellow {
-    --toastBackground: #ffab00;
-    --toastBarBackground: #b67b02;
-  }
-  &-red {
-    --toastBackground: #cc525f;
-    --toastBarBackground: #a6434e;
+.Vue-Toastification__toast {
+  &.Vue-Toastification__toast {
+    &--warning {
+      background-color: #ffab00;
+    }
+    &--error {
+      background-color: #cc525f;
+    }
+    &--success {
+      background-color: #36b37e;
+    }
+    &--info {
+      background-color: #61758f;
+    }
   }
 }
 

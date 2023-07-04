@@ -7,16 +7,17 @@
 <script setup>
 import { useHmsStore } from "@/stores/hms";
 import ShareIcon from "./icons/ShareIcon.vue";
+import { useToast } from "vue-toastification";
 
 const hmsStore = useHmsStore();
+const toast = useToast();
 
 function copyShareLink() {
   const url = `${window.location.origin}?token=${hmsStore.token}`;
   console.log("sharable url = ", url);
   navigator.clipboard.writeText(url).then(
     function () {
-      alert("link copied to clipboard");
-      // toast.success("Room link copied to clipboard");
+      toast.success("Room link copied to clipboard");
     },
     function (err) {
       console.error("failed ot copy link to clip board", err);
