@@ -25,7 +25,9 @@
 import { hmsActions } from "@/utils/hms";
 import { ref } from "vue";
 import { useHmsStore } from "@/stores/hms";
+import { useToast, POSITION } from "vue-toastification";
 
+const toast = useToast();
 const hmsStore = useHmsStore();
 let joinInProgress = ref(false);
 
@@ -47,7 +49,7 @@ async function join() {
   try {
     joinInProgress.value = true;
     hmsStore.token = token;
-    // toast.removeAll(); // it's a new start
+    toast.clear(); // it's a new start
     await hmsActions.join({
       userName: name,
       authToken: token,
@@ -56,7 +58,9 @@ async function join() {
     });
   } catch (err) {
     console.error("Error in joining room", err);
-    // toast.terminal(`Can't join => ${err.message}: ${err.description}`);
+    toast.error(`Can't join => ${err.message}: ${err.description}`, {
+      position: POSITION.BOTTOM_LEFT,
+    });
   } finally {
     joinInProgress.value = false;
   }

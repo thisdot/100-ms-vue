@@ -24,7 +24,7 @@
       /></span>
       <a
         title="Go to GitHub"
-        href="https://github.com/100mslive/svelte-100ms/tree/features"
+        href="https://github.com/thisdot/100-ms-vue"
         rel="noreferrer"
         target="_blank"
       >

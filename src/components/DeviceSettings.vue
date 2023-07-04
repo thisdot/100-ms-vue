@@ -1,5 +1,5 @@
 <template>
-  <div class="device-settings">
+  <div class="device-settings" @click.stop="null">
     <h1>Device Settings</h1>
     <div
       v-for="device_setting in device_settings"
@@ -11,7 +11,11 @@
         :value="device_setting.selectedDevices"
         @change="device_setting.onChange"
       >
-        <option v-for="device in device_setting.items" :key="device.deviceId">
+        <option
+          v-for="device in device_setting.items"
+          :key="device.deviceId"
+          :value="device.deviceId"
+        >
           {{ device.label }}
         </option>
       </select>
@@ -63,6 +67,16 @@ const device_settings = computed(() => {
 h1 {
   text-align: center;
   margin-bottom: 15px;
+}
+
+.device-settings {
+  position: relative;
+  padding: 1rem;
+  max-height: calc(100vh - 4rem);
+  overflow: auto;
+  background: rgb(44, 56, 63);
+  color: white;
+  border-radius: 0.5rem;
 }
 
 .selection {
