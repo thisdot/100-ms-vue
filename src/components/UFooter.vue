@@ -6,36 +6,44 @@
         <button
           class="btn-control"
           @click="toggleAudio"
-          :class="{ pressed: hmsStore.hmsIsLocalAudioEnabled }"
+          :class="{ pressed: !hmsStore.hmsIsLocalAudioEnabled }"
         >
-          <span v-if="hmsStore.hmsIsLocalAudioEnabled">MicIcon</span>
-          <span v-else>MicOffIcon</span>
+          <span v-if="hmsStore.hmsIsLocalAudioEnabled"><MicIcon /></span>
+          <span v-else><MicOffIcon /></span>
         </button>
         <button
           class="btn-control"
           @click="toggleVideo"
-          :class="{ pressed: hmsStore.hmsIsLocalVideoEnabled }"
+          :class="{ pressed: !hmsStore.hmsIsLocalVideoEnabled }"
         >
-          <span v-if="hmsStore.hmsIsLocalVideoEnabled">VideoIcon</span>
-          <span v-else>VideoOffIcon</span>
+          <span v-if="hmsStore.hmsIsLocalVideoEnabled"><VideoIcon /></span>
+          <span v-else><VideoOffIcon /></span>
         </button>
         <button
           class="btn-control"
           @click="toggleScreen"
           :class="{ pressed: hmsStore.hmsIsLocalScreenShared }"
         >
-          share screen
+          <ShareScreenIcon />
         </button>
         <button
           class="btn-control"
           @click="showDeviceModal"
           :class="{ pressed: !!deviceModal }"
         >
-          settings
+          <SettingsIcon />
         </button>
-        <div class="modal" v-if="deviceModal">
-          <button class="close-modal" @click="closeDeviceModal">close</button>
-          <DeviceSettings />
+        <div
+          class="modal"
+          v-if="deviceModal"
+          ref="modal"
+          @click="closeDeviceModal"
+        >
+          <div class="wrap">
+            <div class="content">
+              <DeviceSettings />
+            </div>
+          </div>
         </div>
       </div>
       <div class="control-bar-right">
@@ -44,7 +52,7 @@
           @click="toggleChat"
           :class="{ pressed: hmsStore.isChatOpen }"
         >
-          Chat
+          <ChatIcon />
         </button>
       </div>
     </footer>
@@ -55,12 +63,21 @@
 <script setup>
 import { hmsActions } from "@/utils/hms";
 import DeviceSettings from "./DeviceSettings.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useHmsStore } from "@/stores/hms";
 import UChat from "./UChat.vue";
+import ChatIcon from "./icons/ChatIcon.vue";
+import ShareScreenIcon from "./icons/ShareScreenIcon.vue";
+import VideoIcon from "./icons/VideoIcon.vue";
+import VideoOffIcon from "./icons/VideoOffIcon.vue";
+import MicIcon from "./icons/MicIcon.vue";
+import MicOffIcon from "./icons/MicOffIcon.vue";
+import SettingsIcon from "./icons/SettingsIcon.vue";
+
 const hmsStore = useHmsStore();
 //
 let deviceModal = ref(false);
+let modal = ref();
 
 async function toggleAudio() {
   await hmsActions.setLocalAudioEnabled(!hmsStore.hmsIsLocalAudioEnabled);
@@ -78,6 +95,10 @@ const showDeviceModal = () => (deviceModal.value = true);
 
 const closeDeviceModal = () => (deviceModal.value = false);
 const toggleChat = () => (hmsStore.isChatOpen = !hmsStore.isChatOpen);
+
+onMounted(() => {
+  modal.value?.addEventListener("click", () => (deviceModal.value = false));
+});
 </script>
 
 <style lang="scss" scoped>
@@ -94,7 +115,7 @@ const toggleChat = () => (hmsStore.isChatOpen = !hmsStore.isChatOpen);
 }
 
 .btn-control {
-  width: auto;
+  width: 45px;
   height: 45px;
 
   background-color: #263238;
@@ -122,11 +143,27 @@ const toggleChat = () => (hmsStore.isChatOpen = !hmsStore.isChatOpen);
 }
 
 .modal {
-  position: relative;
-}
-.close-modal {
-  position: absolute;
+  position: fixed;
+  z-index: 1000;
   top: 0;
-  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.66);
+  .wrap {
+    position: relative;
+    margin: 2rem;
+    max-height: 100%;
+
+    .content {
+      width: 40rem;
+      max-width: 100%;
+      max-height: 100%;
+      margin: 0 auto;
+    }
+  }
 }
 </style>
