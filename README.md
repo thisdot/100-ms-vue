@@ -65,5 +65,19 @@ yarn lint
 - **src/components/UToast**: _A custom component for toast should the message of the toast has an HTML tag_
 - **src/components/UVideo**: _Show a video of the connected user and also the alphabet based on the hand sign overlays the video_
 
+
+## Intro to Tensorflow
+
+[Tensorflow](https://www.tensorflow.org/) is an end-to-end platform _(`meaning: delivering complex systems or services in functional form after developing it from beginning to end.`)_ used for building Machine Learning applications and it is also open-source.
+
+## Fingerpose
+
+It is a gesture classifier for hand landmarks detected by Mediapipe hand pose detection
+
+### Utils
+
+- **src/utils/handsigns**: _This is where we defined the hand gesture for all alphabets_
+- **src/utils/hms**: _This is where we initiated the 100ms HMS reactive store_
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
