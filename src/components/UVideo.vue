@@ -77,7 +77,6 @@ function manageVideo(trackId, videoElement) {
         );
         if (hands.length > 0) {
           const GE = new fp.GestureEstimator([
-            fp.Gestures.ThumbsUpGesture,
             Handsigns.aSign,
             Handsigns.bSign,
             Handsigns.cSign,
@@ -121,14 +120,7 @@ function manageVideo(trackId, videoElement) {
             const maxConfidence = confidence.indexOf(
               Math.max.apply(undefined, confidence)
             );
-
-            if (
-              estimatedGestures.gestures[maxConfidence].name !== "thumbs_up"
-            ) {
-              sign.value = estimatedGestures.gestures[maxConfidence].name;
-            } else {
-              sign.value = null;
-            }
+            sign.value = estimatedGestures.gestures[maxConfidence].name;
           }
         } else {
           sign.value = null;
