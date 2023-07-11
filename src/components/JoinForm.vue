@@ -1,6 +1,17 @@
 <template>
   <form @submit.prevent="join">
     <h2>Join Room</h2>
+    <p>To try out the following demo by following the steps below.</p>
+    <ul>
+      <li>Create an account on https://dashboard.100ms.live/</li>
+      <li>
+        Get an auth token for a room following
+        <a
+          href="https://www.100ms.live/docs/javascript/v2/guides/token#getting-a-temporary-token"
+          >this</a
+        >.
+      </li>
+    </ul>
     <input
       v-model="name"
       type="text"
@@ -79,6 +90,15 @@ form {
 
   h2 {
     margin-bottom: 20px;
+  }
+
+  ul {
+    padding: 20px;
+  }
+
+  a {
+    color: white;
+    font-weight: bold;
   }
 }
 
