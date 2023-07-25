@@ -12,7 +12,6 @@ Contents
 
 ## Submitting a Pull Request (PR)
 
-
 Before you submit your Pull Request (PR) consider the following guidelines:
 
 - Search [GitHub](https://github.com/thisdot/100-ms-vue/pulls) for an open or
@@ -50,7 +49,6 @@ Before you submit your Pull Request (PR) consider the following guidelines:
     This is for the sake of a clearer and easier review process.
 
 That's it! Thank you for your contribution!
-
 
 ## Code Guidelines
 
