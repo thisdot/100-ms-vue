@@ -8,22 +8,24 @@
 import UVideo from "./UVideo.vue";
 import { hmsStore } from "@/utils/hms";
 import { selectScreenShareByPeerID } from "@100mslive/hms-video-store";
-import { onUnmounted, ref, watch } from "vue";
+import { onUnmounted, ref, onMounted } from "vue";
 import { useHmsStore } from "@/stores/hms";
 const hmsStoreInstance = useHmsStore();
 
 let unsub = ref();
 let screenTrack = ref();
 
-const retrieveScreenTrack = (peerId) => {
+const retrieveScreenTrack = (peer) => {
   if (unsub.value) unsub.value();
-  if (!peerId) return;
+  if (!peer) return;
   unsub.value = hmsStore.subscribe((track) => {
     screenTrack.value = track;
-  }, selectScreenShareByPeerID(peerId));
+  }, selectScreenShareByPeerID(peer.id));
 };
 
-watch(hmsStoreInstance.hmsIsSomeoneScreenSharing, retrieveScreenTrack);
+onMounted(() => {
+  retrieveScreenTrack(hmsStoreInstance.hmsPeerScreenSharing);
+});
 
 onUnmounted(() => unsub.value?.());
 </script>
